@@ -29,8 +29,8 @@ export default function SearchInput({ onSubmit }: SearchInputProps) {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter a subject to learn about (e.g., 'History', 'Mathematics', 'Programming')"
-            className="w-full pl-12 pr-24 py-4 text-lg border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
+            placeholder="Enter a subject to learn about (e.g., 'History')"
+            className="w-full pl-12 pr-24 py-4 text-lg text-black border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
             disabled={isLoading}
           />
           <button

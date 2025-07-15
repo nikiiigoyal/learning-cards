@@ -1,16 +1,24 @@
-'use client'
+// components/SubjectCard.tsx
+'use client';
 
-import { Subject } from "@/lib/types"
-import { ArrowRight, BookOpen, Clock } from "lucide-react";
+import { Subject } from '@/lib/types';
+import { useCardStore } from '../../store/cardStore';
+import { ArrowRight, Clock, BookOpen } from 'lucide-react';
 
-interface subjectCardProps {
-    subject: Subject
+interface SubjectCardProps {
+  subject: Subject;
 }
-export default function SubjectCard ({subject} : subjectCardProps) {
-    return (
-        <>
-         <div 
-      
+
+export default function SubjectCard({ subject }: SubjectCardProps) {
+  const { setCurrentSubject } = useCardStore();
+
+  const handleClick = () => {
+    setCurrentSubject(subject);
+  };
+
+  return (
+    <div 
+      onClick={handleClick}
       className="bg-white rounded-xl shadow-lg p-6 cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-100"
     >
       <div className="flex items-start justify-between mb-4">
@@ -39,6 +47,5 @@ export default function SubjectCard ({subject} : subjectCardProps) {
         </div>
       </div>
     </div>
-        </>
-    )
+  );
 }

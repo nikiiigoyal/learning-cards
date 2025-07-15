@@ -1,13 +1,22 @@
-'use client'
+// components/TopicCard.tsx
+'use client';
 
-import { Topic } from "@/lib/types";
-import { ArrowRight, Clock } from "lucide-react";
+import { Topic } from '@/lib/types';
+import { useCardStore } from '../../store/cardStore';
+import { Clock,  ArrowRight } from 'lucide-react';
 
 interface TopicCardProps {
-    topic:Topic;
+  topic: Topic;
 }
-export default function TopicCard({topic}: TopicCardProps){
-   const getDifficultyColor = (difficulty: string) => {
+
+export default function TopicCard({ topic }: TopicCardProps) {
+  const { setSelectedTopic } = useCardStore();
+
+  const handleClick = () => {
+    setSelectedTopic(topic);
+  };
+
+  const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner': return 'bg-green-100 text-green-800';
       case 'intermediate': return 'bg-yellow-100 text-yellow-800';
@@ -15,11 +24,10 @@ export default function TopicCard({topic}: TopicCardProps){
       default: return 'bg-gray-100 text-gray-800';
     }
   };
-   
-    return (
-        <>
-        <div 
-      
+
+  return (
+    <div 
+      onClick={handleClick}
       className="bg-white rounded-lg shadow-md p-5 cursor-pointer hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-blue-200"
     >
       <div className="flex items-start justify-between mb-3">
@@ -30,8 +38,8 @@ export default function TopicCard({topic}: TopicCardProps){
       <p className="text-gray-600 mb-4 text-sm line-clamp-2">{topic.description}</p>
       
       <div className="flex items-center justify-between mb-3">
-        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(topic.diffficulty)}`}>
-          {topic.diffficulty}
+        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(topic.difficulty)}`}>
+          {topic.difficulty}
         </span>
         <div className="flex items-center gap-1 text-sm text-gray-500">
           <Clock className="w-4 h-4" />
@@ -42,7 +50,7 @@ export default function TopicCard({topic}: TopicCardProps){
       <div className="border-t pt-3">
         <p className="text-xs text-gray-500 mb-2">Key Points:</p>
         <div className="flex flex-wrap gap-1">
-          {topic.keypoints.slice(0, 3).map((point, index) => (
+          {topic.keyPoints.slice(0, 3).map((point, index) => (
             <span 
               key={index} 
               className="inline-block bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs"
@@ -50,14 +58,13 @@ export default function TopicCard({topic}: TopicCardProps){
               {point}
             </span>
           ))}
-          {topic.keypoints.length > 3 && (
+          {topic.keyPoints.length > 3 && (
             <span className="inline-block bg-gray-50 text-gray-500 px-2 py-1 rounded text-xs">
-              +{topic.keypoints.length - 3} more
+              +{topic.keyPoints.length - 3} more
             </span>
           )}
         </div>
       </div>
     </div>
-        </>
-    )
+  );
 }

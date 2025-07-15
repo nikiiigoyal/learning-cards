@@ -1,9 +1,9 @@
 export interface Topic {
     id: string;
     title: string;
-    keypoints: string[];
+   keyPoints: string[];
     description: string;
-    diffficulty: 'beginner' | 'intermediate' | 'advanced';
+    difficulty: 'beginner' | 'intermediate' | 'advanced';
     estimatedTime: string;
 
 }
